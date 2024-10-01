@@ -17,31 +17,26 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
+            VStack {
+                // Add your diamond image
+                Image("diamond") // Ensure that the image is in your Assets.xcassets with this name
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 200, height: 200) // Adjust size as needed
+                
+                // Add a label with a text value
+                Text("This is a diamond image")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.blue) //Change color and font styling as needed
+                Text("This is a diamond image")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.blue) //
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-            Text("Select an item")
+            .padding()
         }
-    }
-
+    
     private func addItem() {
         withAnimation {
             let newItem = Item(context: viewContext)
